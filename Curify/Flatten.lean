@@ -40,5 +40,19 @@ theorem compileIntLiteral_correct
       IntExpr.eval store (IntExpr.lit value) := by
   simp [compileIntLiteral]
 
+/-- Compile an integer variable into a TAC copy to `dest`. -/
+def compileIntVariable (dest source : VarName) : TAC.Program :=
+  [TAC.Command.copy dest source]
+
+/--
+Executing the TAC for an integer variable stores the expression value in the
+requested destination.
+-/
+theorem compileIntVariable_correct
+    (store : Store) (dest source : VarName) :
+    TAC.Program.exec (compileIntVariable dest source) store dest =
+      IntExpr.eval store (IntExpr.var source) := by
+  simp [compileIntVariable]
+
 end Flatten
 end Curify

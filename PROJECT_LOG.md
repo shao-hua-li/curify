@@ -19,3 +19,4 @@ future proof work can recover why a design choice or validation check was added.
 | Add TAC command destination lemmas | 2026-05-14 | This commit | Small command lemmas keep later compiler proofs readable and reusable. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Define temporary names | 2026-05-14 | This commit | Flattening needs reserved generated names and a counter for fresh temporaries. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Compile integer literals | 2026-05-14 | This commit | The smallest compiler theorem connects one emitted TAC command to source evaluation. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
+| Compile integer variables | 2026-05-14 | This commit | Variable flattening copies a source variable value into the requested destination. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
