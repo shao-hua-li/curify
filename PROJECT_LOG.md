@@ -13,3 +13,4 @@ future proof work can recover why a design choice or validation check was added.
 | Define integer literals | 2026-05-14 | This commit | An AST can be an inductive datatype, and semantics can be a total evaluator. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Add integer variables | 2026-05-14 | This commit | Source expression semantics can depend on program state through a store. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Add integer addition | 2026-05-14 | This commit | Recursive AST syntax leads to recursive evaluators and local evaluation facts. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
+| Define TAC operands | 2026-05-14 | This commit | TAC operands are shallow constants or variable reads over the store. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
