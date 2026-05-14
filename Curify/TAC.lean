@@ -43,5 +43,40 @@ inductive Command where
   | add (dest : VarName) (left right : Operand)
   deriving DecidableEq, Repr
 
+namespace Command
+
+/-- Execute one TAC command by updating the store. -/
+def exec (command : Command) (store : Store) : Store :=
+  match command with
+  | assignConst dest value => Store.update store dest value
+  | copy dest source => Store.update store dest (store source)
+  | add dest left right =>
+      Store.update store dest (Operand.eval store left + Operand.eval store right)
+
+end Command
+
+/-- A straight-line TAC program is a list of commands. -/
+abbrev Program := List Command
+
+namespace Program
+
+/-- Execute a straight-line TAC program from left to right. -/
+def exec : Program -> Store -> Store
+  | [], store => store
+  | command :: rest, store => exec rest (Command.exec command store)
+
+/-- Executing an empty TAC program leaves the store unchanged. -/
+@[simp]
+theorem exec_nil (store : Store) :
+    exec [] store = store := by
+  rfl
+
+/-- Executing a cons runs the first command, then the rest of the program. -/
+@[simp]
+theorem exec_cons (command : Command) (rest : Program) (store : Store) :
+    exec (command :: rest) store = exec rest (Command.exec command store) := by
+  rfl
+
+end Program
 end TAC
 end Curify

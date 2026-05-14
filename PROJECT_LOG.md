@@ -15,3 +15,4 @@ future proof work can recover why a design choice or validation check was added.
 | Add integer addition | 2026-05-14 | This commit | Recursive AST syntax leads to recursive evaluators and local evaluation facts. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Define TAC operands | 2026-05-14 | This commit | TAC operands are shallow constants or variable reads over the store. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Define straight-line TAC commands | 2026-05-14 | This commit | TAC commands make each assignment, copy, and addition explicit before control flow. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
+| Define straight-line TAC semantics | 2026-05-14 | This commit | Executable semantics can model command and program execution as store transformations. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
