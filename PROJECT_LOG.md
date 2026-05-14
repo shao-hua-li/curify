@@ -17,3 +17,4 @@ future proof work can recover why a design choice or validation check was added.
 | Define straight-line TAC commands | 2026-05-14 | This commit | TAC commands make each assignment, copy, and addition explicit before control flow. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Define straight-line TAC semantics | 2026-05-14 | This commit | Executable semantics can model command and program execution as store transformations. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Add TAC command destination lemmas | 2026-05-14 | This commit | Small command lemmas keep later compiler proofs readable and reusable. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
+| Define temporary names | 2026-05-14 | This commit | Flattening needs reserved generated names and a counter for fresh temporaries. | `lake build` and `scripts/check-proof-hygiene.sh` passed |

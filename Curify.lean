@@ -3,3 +3,4 @@ import Curify.Core
 import Curify.Store
 import Curify.Expr
 import Curify.TAC
+import Curify.Flatten
