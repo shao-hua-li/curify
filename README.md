@@ -28,9 +28,9 @@ Use this checklist to track overall project progress. A milestone should be
 checked only after its validation command passes and the corresponding work is
 committed.
 
-- [ ] Project scaffold: paper source, project log, glossary, Lean/Lake project,
+- [x] Project scaffold: paper source, project log, glossary, Lean/Lake project,
   and proof-hygiene checks are in place.
-- [ ] Lean foundations: names, values, stores, expressions, and basic state
+- [x] Lean foundations: names, values, stores, expressions, and basic state
   lemmas are defined and checked.
 - [ ] TAC core: operands, straight-line commands, TAC execution, and local TAC
   command lemmas are implemented.
