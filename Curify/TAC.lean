@@ -53,6 +53,25 @@ def exec (command : Command) (store : Store) : Store :=
   | add dest left right =>
       Store.update store dest (Operand.eval store left + Operand.eval store right)
 
+/-- Executing constant assignment writes the constant to the destination. -/
+@[simp]
+theorem exec_assignConst_dest (store : Store) (dest : VarName) (value : IntValue) :
+    exec (assignConst dest value) store dest = value := by
+  simp [exec]
+
+/-- Executing copy writes the source variable's value to the destination. -/
+@[simp]
+theorem exec_copy_dest (store : Store) (dest source : VarName) :
+    exec (copy dest source) store dest = store source := by
+  simp [exec]
+
+/-- Executing addition writes the sum of the operand values to the destination. -/
+@[simp]
+theorem exec_add_dest (store : Store) (dest : VarName) (left right : Operand) :
+    exec (add dest left right) store dest =
+      Operand.eval store left + Operand.eval store right := by
+  simp [exec]
+
 end Command
 
 /-- A straight-line TAC program is a list of commands. -/
