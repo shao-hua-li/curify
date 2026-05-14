@@ -4,8 +4,9 @@ namespace Curify
 namespace TAC
 
 /-!
-The first TAC fragment contains only operands. TAC operands are shallow: each is
-either an integer constant or a variable name to read from the store.
+The first TAC fragment contains shallow operands and straight-line commands.
+Commands assign integer constants, copy variables, or add two shallow operands.
+Control flow is intentionally left for a later step.
 -/
 
 /-- Integer TAC operands: constants or variables. -/
@@ -34,5 +35,13 @@ theorem eval_var (store : Store) (name : VarName) :
   rfl
 
 end Operand
+
+/-- Straight-line integer TAC commands, with no labels or jumps yet. -/
+inductive Command where
+  | assignConst (dest : VarName) (value : IntValue)
+  | copy (dest source : VarName)
+  | add (dest : VarName) (left right : Operand)
+  deriving DecidableEq, Repr
+
 end TAC
 end Curify
