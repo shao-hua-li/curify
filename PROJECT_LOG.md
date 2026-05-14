@@ -20,3 +20,4 @@ future proof work can recover why a design choice or validation check was added.
 | Define temporary names | 2026-05-14 | This commit | Flattening needs reserved generated names and a counter for fresh temporaries. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Compile integer literals | 2026-05-14 | This commit | The smallest compiler theorem connects one emitted TAC command to source evaluation. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
 | Compile integer variables | 2026-05-14 | This commit | Variable flattening copies a source variable value into the requested destination. | `lake build` and `scripts/check-proof-hygiene.sh` passed |
+| Compile integer addition | 2026-05-14 | This commit | Addition flattening composes subexpression code through generated temporaries. | `lake build` and `scripts/check-proof-hygiene.sh` passed |

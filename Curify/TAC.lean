@@ -96,6 +96,16 @@ theorem exec_cons (command : Command) (rest : Program) (store : Store) :
     exec (command :: rest) store = exec rest (Command.exec command store) := by
   rfl
 
+/-- Executing appended programs runs the first program, then the second. -/
+@[simp]
+theorem exec_append (first second : Program) (store : Store) :
+    exec (first ++ second) store = exec second (exec first store) := by
+  induction first generalizing store with
+  | nil =>
+      rfl
+  | cons command rest ih =>
+      simp [exec, ih]
+
 end Program
 end TAC
 end Curify

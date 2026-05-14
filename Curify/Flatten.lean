@@ -54,5 +54,40 @@ theorem compileIntVariable_correct
       IntExpr.eval store (IntExpr.var source) := by
   simp [compileIntVariable]
 
+/--
+Compile an integer addition from already-flattened subexpression code.
+
+The left code must store its result in `__t<counter>`, and the right code must
+store its result in `__t<counter+1>`.
+-/
+def compileIntAddition
+    (dest : VarName) (counter : TempCounter)
+    (leftCode rightCode : TAC.Program) : TAC.Program :=
+  let leftTemp := intTempName counter
+  let rightTemp := intTempName (nextTemp counter)
+  leftCode ++ rightCode ++
+    [TAC.Command.add dest (TAC.Operand.var leftTemp) (TAC.Operand.var rightTemp)]
+
+/--
+If the subexpression code computes the left and right values into the generated
+temporaries, then the combined addition code computes the source addition into
+the requested destination.
+-/
+theorem compileIntAddition_correct
+    (store : Store) (dest : VarName) (counter : TempCounter)
+    (left right : IntExpr) (leftCode rightCode : TAC.Program)
+    (hright :
+      TAC.Program.exec rightCode (TAC.Program.exec leftCode store)
+          (intTempName (nextTemp counter)) =
+        IntExpr.eval store right)
+    (hleft_final :
+      TAC.Program.exec rightCode (TAC.Program.exec leftCode store)
+          (intTempName counter) =
+        IntExpr.eval store left) :
+    TAC.Program.exec
+        (compileIntAddition dest counter leftCode rightCode) store dest =
+      IntExpr.eval store (IntExpr.add left right) := by
+  simp [compileIntAddition, hright, hleft_final]
+
 end Flatten
 end Curify
