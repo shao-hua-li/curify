@@ -1,4 +1,5 @@
-import Curify.Core
+import Curify.Expr
+import Curify.TAC
 
 namespace Curify
 namespace Flatten
@@ -24,6 +25,20 @@ def firstTemp : TempCounter := 0
 /-- Advance to the next temporary counter. -/
 def nextTemp (counter : TempCounter) : TempCounter :=
   counter + 1
+
+/-- Compile an integer literal into a TAC assignment to `dest`. -/
+def compileIntLiteral (dest : VarName) (value : IntValue) : TAC.Program :=
+  [TAC.Command.assignConst dest value]
+
+/--
+Executing the TAC for an integer literal stores the expression value in the
+requested destination.
+-/
+theorem compileIntLiteral_correct
+    (store : Store) (dest : VarName) (value : IntValue) :
+    TAC.Program.exec (compileIntLiteral dest value) store dest =
+      IntExpr.eval store (IntExpr.lit value) := by
+  simp [compileIntLiteral]
 
 end Flatten
 end Curify
